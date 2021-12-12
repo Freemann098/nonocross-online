@@ -1,0 +1,80 @@
+<!--Login dialog-->
+<div class="container" *ngIf="loginInputShow">
+  <h2 mat-dialog-title style="text-align: center;">Login</h2>
+  <mat-dialog-content class="p-1">
+    <div class="container">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="email@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid"></mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="password" [type]="hidePassword ? 'password' : 'text'" required>
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div style="text-align: center;">
+      <button mat-raised-button (click)="loginWithEmailAndPassword()" class="primary-color-bg" style="width: 100px;">Log In</button>
+    </div>
+    <br>
+    <mat-error *ngIf="gotError" style="text-align: center;">{{ errorMessage }}</mat-error>
+    <hr>
+    <div class="row">
+      <div class="col" style="text-align: center;">
+        <a class="btn btn-outline-light" role="button" style="text-transform:none" (click)="loginWithGoogle()">
+          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+          Login with Google
+        </a>
+      </div>
+    </div>
+  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="row">
+      <div class="col">
+        <button mat-button (click)="showSignupInput()">Create Account</button>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <button mat-button mat-dialog-close>Cancel</button>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</div>
+<!--Signup dialog-->
+<div class="container" *ngIf="signupInputShow">
+  <h2 mat-dialog-title style="text-align: center;">Create Account</h2>
+  <mat-dialog-content class="p-1">
+    <div class="container">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="email@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid"></mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="password" [type]="hidePassword ? 'password' : 'text'" required>
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <br>
+    <mat-error *ngIf="gotError" style="text-align: center;">{{ errorMessage }}</mat-error>
+  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="row">
+      <div class="col">
+        <button mat-button (click)="signupWithEmailAndPassword()">Sign Up</button>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <button mat-button mat-dialog-close>Cancel</button>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</div>

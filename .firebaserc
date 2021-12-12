@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nonopic-online": {
+      "hosting": {
+        "nonocross-online": [
+          "nonocrossonline"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nonopic-online"
+  }
+}

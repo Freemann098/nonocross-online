@@ -1,0 +1,31 @@
+<p *ngIf="isLoading">Loading...</p>
+<div
+  class="board"
+  [ngClass]="{'board-phone': (boardSize < 20)}"
+  [ngStyle]="{'width': (400 + (boardSize * 12)) + 'px'}"
+  >
+  <mat-card>
+    <mat-grid-list *ngIf="!isLoading" cols="{{ boardSize + highestNumRowHints}}" rowHeight="1:1">
+      <div *ngFor="let in of counter(highestNumColHints); let i = index">
+        <mat-grid-tile *ngFor="let in of counter(highestNumRowHints); let i = index"></mat-grid-tile>
+        <mat-grid-tile class="hint-column-tile" *ngFor="let hints of colHints; let h = index">
+          <div  *ngIf="hints[i]!=0">{{ hints[i] }}</div>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+    <mat-grid-list *ngIf="!isLoading" cols="{{ boardSize + highestNumRowHints }}" rowHeight="1:1">
+      <div *ngFor="let hints of rowHints; let h = index">
+        <mat-grid-tile class="hint-row-tile" *ngFor="let hint of hints">
+          <div *ngIf="hint != 0">{{ hint }}</div>
+        </mat-grid-tile>
+        <div *ngFor="let in of counter(boardSize); let i = index">
+          <mat-grid-tile
+            [ngClass]="{'tile-unselected': (board[(h*boardSize) + i] == 0), 'tile-selected': (board[(h*boardSize) + i] == 1)}"
+            (click)="tileClicked((h*boardSize) + i)"
+          ></mat-grid-tile>
+        </div>
+      </div>
+    </mat-grid-list>
+  </mat-card>
+</div>
+<h1>{{hasSolved}}</h1>

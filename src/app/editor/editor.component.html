@@ -1,0 +1,62 @@
+<div class="container" style="max-width: 1000px;">
+  <mat-card>
+    <div class="row">
+      <div class="col">
+        <h2 style="display: inline;">Custom Nonogram Editor</h2>
+      </div>
+      <div class="col">
+        <div style="text-align: right; ">
+          <button mat-button [disabled]="!isLoggedin">OPEN</button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <br>
+  <div class="row">
+    <div class="col">
+      <mat-card>
+        <mat-card-subtitle>Settings</mat-card-subtitle>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" [(ngModel)]="puzzleName">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a size</mat-label>
+          <mat-select [(value)]="selectedSizeOption" (valueChange)="initBoard()">
+            <mat-option [value]="option.value" *ngFor="let option of sizeOptions">{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <button mat-button class="primary-color-bg" (click)="exportBoardAsTxt()">Export</button>
+      </mat-card>
+      <br>
+      <mat-card>
+        <app-load-file (errorEvent)="receiveError($event)" (fileEvent)="receiveFile($event)"></app-load-file>
+        <br>
+        <h5 *ngIf="gotError" style="color: rgb(219, 82, 48)">{{ errorMessage }}</h5>
+        <h5 *ngIf="!gotError && loadedFile" style="color:rgb(100, 236, 134)">Successfully imported file</h5>
+      </mat-card>
+      <br>
+    </div>
+    <div class="col-6" [ngStyle]="{'width': 400 + (selectedSizeOption * 8) + 'px'}">
+      <mat-card >
+        <mat-grid-list *ngIf="!isLoading" cols="{{ selectedSizeOption }}" rowHeight="1:1">
+          <div *ngFor="let tile of board; let i = index">
+            <mat-grid-tile
+              [ngClass]="{'tile-unselected': board[i] == 0, 'tile-selected': board[i] == 1}"
+              (click)="tileClicked(i)"
+            ></mat-grid-tile>
+          </div>
+        </mat-grid-list>
+        <mat-card-actions align="end">
+          <h5 *ngIf="!isLoggedin" style="color: rgb(255, 208, 0); margin-top: 11px; margin-right: 50px;">
+            Login required to open, save, or publish
+          </h5>
+          <button mat-button [disabled]="!isLoggedin">SAVE</button>
+          <button mat-button [disabled]="!isLoggedin">PUBLISH</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

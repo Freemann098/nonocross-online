@@ -33,6 +33,7 @@ import { LoadFileComponent } from './editor/load-file/load-file.component';
 import { LoginComponent } from './login/login.component';
 import { SavedGramTreeComponent } from './saved-gram-tree/saved-gram-tree.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

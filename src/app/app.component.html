@@ -1,14 +1,22 @@
 <app-navbar (toggleSidebarEvt)="sidenav.toggle()"></app-navbar>
 <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
-  <mat-sidenav class="sidenav secondary-color-bg" #sidenav mode="side" style="width: 250px;">
+  <mat-sidenav class="sidenav secondary-color-bg" #sidenav mode="over" style="width: 250px; overflow: hidden;">
     <mat-nav-list>
       <a mat-list-item routerLink="home" (click)="sidenav.close()">Home</a>
       <a mat-list-item class="secondary-color-bg" style="color: grey" routerLink="library" (click)="sidenav.close()" disabled>Library ( Coming Soon )</a>
       <a mat-list-item routerLink="editor" (click)="sidenav.close()">Editor</a>
+      <footer class="container p-2">
+        <a href="https://github.com/Freemann098/nonocross-online" target="_blank">
+          <fa-icon [icon]="iconGithub" size="3x"></fa-icon>
+        </a>
+        <br><br>
+        <span>Made by </span>
+        <a href="https://github.com/Freemann098" target="_blank"><u>Chase Smith</u></a>
+      </footer>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content (click)="sidenav.close()" class="sidenav-content background-color-bg">
-    <div class="container">
+    <div class="container disable-dbl-tap-zoom">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

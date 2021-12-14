@@ -2,8 +2,8 @@
   <button mat-icon-button (click)="toggleSidebar()" aria-label="icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <a class="navbar-logo" routerLink="home">
-    <img  src="http://www.chasersmith.com/nonocross-online/logo-re.png">
+  <a  routerLink="home">
+    <img class="navbar-logo navbar-logo-phone" src="http://www.chasersmith.com/nonocross-online/logo-re.png">
   </a>
   <span class="navbar-spacer"></span>
   <button mat-icon-button *ngIf="loggedIn" [matMenuTriggerFor]="profileMenu" style="height: 70px;">

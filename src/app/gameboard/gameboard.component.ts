@@ -16,7 +16,6 @@ export class GameboardComponent implements OnInit {
   //Difficulty 0=easy  1=normal 2=hard 3=random
   @Input() difficulty: number = 0;
 
-  isLoading: boolean = false;
   hasSolved: boolean = false;
 
   //guess board, changes based on what tiles user clicks, 0 or 1
@@ -36,14 +35,12 @@ export class GameboardComponent implements OnInit {
     this.initBoard();
   }
 
-  async initBoard() {
-    this.isLoading = true;
-    await this.generateBoard();
-    await this.generateHints();
-    this.isLoading = false;
+  initBoard() {
+    this.generateBoard();
+    this.generateHints();
   }
 
-  async generateBoard() {
+  generateBoard(): void {
     let numTiles = (this.boardSize*this.boardSize);
 
     //Generate random solution based on diffictuly if no solution was inputed
@@ -94,7 +91,7 @@ export class GameboardComponent implements OnInit {
     }
   }
 
-  async generateHints() {
+  generateHints() {
     //Get hints for the columns
     for (let x = 0; x < this.boardSize; x++) {
       let streak = 0;
@@ -165,11 +162,11 @@ export class GameboardComponent implements OnInit {
       hints = [];
     }
 
-    await this.fixHintsForDisplay();
+    this.fixHintsForDisplay();
   }
 
-  //Due to way numbers are printed with ngFor, need to fill hint arrays with 0s
-  async fixHintsForDisplay() {
+  //Due to way the hints are printed with ngFor as a grid, need to fill the 0 hint spots with 0s
+  fixHintsForDisplay(): void {
     //columns
     for (let i = 0; i < this.colHints.length; i++) {
       let tempHintArray = [];

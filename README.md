@@ -1,4 +1,6 @@
-# NonocrossOnline
+# NonoCross Online
+
+A nonogram puzzle Angular web app that can generate various sized nonograms. Has a nonogram editor that can export custom puzzles as txt files so they can be imported and shared. Has Firebase authentication allowing users to login with google or registered accounts. Planned implementation of user-made custom nonogram browser.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.
 

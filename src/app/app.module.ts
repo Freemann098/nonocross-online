@@ -32,6 +32,7 @@ import { EditorComponent } from './editor/editor.component';
 import { LoadFileComponent } from './editor/load-file/load-file.component';
 import { LoginComponent } from './login/login.component';
 import { SavedGramTreeComponent } from './saved-gram-tree/saved-gram-tree.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SavedGramTreeComponent } from './saved-gram-tree/saved-gram-tree.compon
     EditorComponent,
     LoadFileComponent,
     LoginComponent,
-    SavedGramTreeComponent
+    SavedGramTreeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

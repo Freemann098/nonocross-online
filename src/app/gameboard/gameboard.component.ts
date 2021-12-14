@@ -54,6 +54,7 @@ export class GameboardComponent implements OnInit {
         let chanceOfFill = 0;
         let ranNum = Math.floor((Math.random() * 100) + 1);
 
+        //Basic difficulty algorithm to determine frequency of multiple filled tiles, could be improved
         switch (this.difficulty) {
           case 0:
             chanceOfFill = 100 - (streak * (100 / this.boardSize));

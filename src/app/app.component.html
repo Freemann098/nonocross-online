@@ -1,19 +1,4 @@
-<mat-toolbar class="primary-color-bg unselectable">
-  <button mat-icon-button (click)="sidenav.toggle()" aria-label="icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <a class="navbar-logo" routerLink="home">
-    <img  src="http://www.chasersmith.com/nonocross-online/logo-re.png">
-  </a>
-  <span class="navbar-spacer"></span>
-  <button mat-icon-button *ngIf="loggedIn" [matMenuTriggerFor]="profileMenu" style="height: 70px;">
-    <img class="img-circle" width="38px" src="{{ userAvatarUrl}}">
-  </button>
-  <button mat-button *ngIf="showLoginButton" (click)="openLoginDialog()">Log In</button>
-  <mat-menu #profileMenu="matMenu" style="padding-top: 100px;">
-    <button mat-menu-item (click)="logout()">Log Out</button>
-  </mat-menu>
-</mat-toolbar>
+<app-navbar (toggleSidebarEvt)="sidenav.toggle()"></app-navbar>
 <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
   <mat-sidenav class="sidenav secondary-color-bg" #sidenav mode="side" style="width: 250px;">
     <mat-nav-list>
@@ -27,6 +12,5 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-
 </mat-sidenav-container>
 

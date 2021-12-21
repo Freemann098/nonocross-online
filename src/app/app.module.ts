@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,6 +83,7 @@ import { DeleteDialog } from './nonogram-list/nonogram-list.component';
     MatTreeModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatPaginatorModule,
     FirestoreModule,
     StorageModule,
     AngularFireModule,

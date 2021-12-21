@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
+import { CustomGram } from '../services/custom-gram';
 import { GramDatabaseService } from '../services/gram-database.service';
 
 interface sizeOption {
@@ -108,7 +109,18 @@ export class EditorComponent implements OnInit {
     const openDialogRef = this.dialog.open(OpenDialog);
 
     openDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const solutionString = result.solution;
+        const size = Math.sqrt(result.solution.length);
 
+        this.board = [];
+        this.selectedSizeOption = this.sizeOptions.find(({value}) => value === size)!.value;
+        this.puzzleName = result.name;
+
+        for (let i = 0; i < solutionString.length; i++) {
+          this.board.push(parseInt(result.solution.charAt(i)));
+        }
+      }
     });
   }
 
@@ -168,4 +180,10 @@ export class PublishDialog {}
   selector: 'dialog-open-dialog',
   templateUrl: 'open-dialog.html',
 })
-export class OpenDialog {}
+export class OpenDialog {
+  constructor(public dialogRef: MatDialogRef<OpenDialog>) {}
+
+  openGram(gram: CustomGram) {
+    this.dialogRef.close(gram);
+  }
+}

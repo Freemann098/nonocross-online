@@ -1,1 +1,24 @@
-<p>profile works!</p>
+<div class="row">
+  <div class="col computer-col"></div>
+  <div class="col" >
+    <mat-card>
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <img class="img-avatar" width="100px" src="{{ userAvatarUrl }}">
+          <br>
+          <h1>{{ username }}</h1>
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" [(ngModel)]="usernameInput">
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Avatar URL</mat-label>
+            <input matInput type="text" [(ngModel)]="avatarUrlInput">
+          </mat-form-field><br>
+          <button mat-button class="primary-color-bg" (click)="updateProfile()">Update</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col computer-col"></div>
+</div>

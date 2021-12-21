@@ -19,7 +19,9 @@
         </mat-grid-tile>
         <div *ngFor="let in of counter(boardSize); let i = index">
           <mat-grid-tile
-            [ngClass]="{'tile-unselected': (board[(h*boardSize) + i] == 0), 'tile-selected': (board[(h*boardSize) + i] == 1)}"
+            [ngClass]="{'tile-unselected': (board[(h*boardSize) + i] == 0),
+                        'tile-selected': (board[(h*boardSize) + i] == 1),
+                        'tile-crossed': (board[(h*boardSize) + i] == 2)}"
             (click)="tileClicked((h*boardSize) + i)"
           ></mat-grid-tile>
         </div>
@@ -29,5 +31,5 @@
 </div>
 <br>
 <div style="text-align: center;">
-<h1 *ngIf="hasSolved">Nonogram Solved!</h1>
+  <h1 *ngIf="hasSolved">Nonogram Solved!</h1>
 </div>

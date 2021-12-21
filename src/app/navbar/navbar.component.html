@@ -11,7 +11,7 @@
   </button>
   <button mat-button *ngIf="showLoginButton" (click)="openLoginDialog()">Log In</button>
   <mat-menu #profileMenu="matMenu" style="padding-top: 100px;">
-    <!--button mat-menu-item routerLink="profile">Profile</button-->
+    <button mat-menu-item routerLink="profile">Profile</button>
     <button mat-menu-item (click)="logout()">Log Out</button>
   </mat-menu>
 </mat-toolbar>

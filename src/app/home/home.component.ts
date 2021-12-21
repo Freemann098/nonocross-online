@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Auth, getRedirectResult } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomGram } from '../services/custom-gram';
 

@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Open Custom Nonogram</h2>
 <mat-dialog-content class="mat-typography">
   <p>Select a published nonogram to import it into the editor</p>
-  <app-nonogram-list></app-nonogram-list>
+  <app-nonogram-list (openNonogramEvent)="openGram($event)"></app-nonogram-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

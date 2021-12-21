@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { GramDatabaseService } from '../services/gram-database.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,19 +16,18 @@ export class NavbarComponent implements OnInit {
   showLoginButton: boolean = false;
   loggedIn: boolean = false;
 
-  //default avatar, if user signs in with google, retreive google account avatar below
-  userAvatarUrl: string = "https://www.teenwiseseattle.com/wp-content/uploads/2017/04/default_avatar.png";
+  userAvatarUrl: string = "";
 
-  constructor(private auth:Auth, public dialog: MatDialog) { }
+  constructor(private auth:Auth, public dialog: MatDialog, private db: GramDatabaseService) { }
 
   ngOnInit(): void {
     this.auth.onAuthStateChanged(
       res => {
         if (res?.getIdToken) {
           this.loggedIn = true;
-          if (res.photoURL) {
-            this.userAvatarUrl = res.photoURL;
-          }
+          this.db.userProfileDoc.valueChanges().subscribe((url) => {
+            this.userAvatarUrl = url?.avatar_url!;
+          });
         } else {
           this.showLoginButton = true;
           this.loggedIn = false;

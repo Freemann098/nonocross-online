@@ -198,6 +198,7 @@ export class GameboardComponent implements OnInit {
   }
 
   resetBoard(solution?: number[]) {
+    this.hasSolved = false;
     this.board = [];
     this.solution = [];
     if (solution) {
@@ -217,8 +218,8 @@ export class GameboardComponent implements OnInit {
   }
 
   tileClicked(tileIndex: number) {
-    if (this.board[tileIndex] == 0) {
-      this.board[tileIndex] = 1;
+    if (this.board[tileIndex] < 2) {
+      this.board[tileIndex] += 1;
     } else {
       this.board[tileIndex] = 0;
     }
@@ -231,7 +232,7 @@ export class GameboardComponent implements OnInit {
 
     //Compare board with solution, count incorrect tiles
     for (let i = 0; i < this.board.length; i++) {
-      if (this.board[i] != this.solution[i]) {
+      if (this.board[i] != this.solution[i] && this.board[i] != 2) {
         numIncorrect++;
       }
     }

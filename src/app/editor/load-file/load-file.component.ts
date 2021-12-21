@@ -1,16 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-load-file',
   templateUrl: './load-file.component.html',
   styleUrls: ['./load-file.component.sass']
 })
-export class LoadFileComponent implements OnInit {
+export class LoadFileComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   fileData: any;
 

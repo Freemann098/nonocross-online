@@ -15,14 +15,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { FirestoreModule, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { StorageModule } from '@angular/fire/storage';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { GameboardComponent } from './gameboard/gameboard.component';
 import { MatCardModule } from '@angular/material/card';
@@ -31,9 +36,14 @@ import { LibraryComponent } from './library/library.component';
 import { EditorComponent } from './editor/editor.component';
 import { LoadFileComponent } from './editor/load-file/load-file.component';
 import { LoginComponent } from './login/login.component';
-import { SavedGramTreeComponent } from './saved-gram-tree/saved-gram-tree.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfileComponent } from './profile/profile.component';
+import { NonogramListComponent } from './nonogram-list/nonogram-list.component';
+
+import { PublishDialog } from './editor/editor.component';
+import { OpenDialog } from './editor/editor.component';
+import { DeleteDialog } from './nonogram-list/nonogram-list.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +54,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     EditorComponent,
     LoadFileComponent,
     LoginComponent,
-    SavedGramTreeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent,
+    NonogramListComponent,
+    PublishDialog,
+    OpenDialog,
+    DeleteDialog,
   ],
   imports: [
     BrowserModule,
@@ -66,9 +80,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatInputModule,
     MatFormFieldModule,
     MatTreeModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    FirestoreModule,
+    StorageModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     FontAwesomeModule
   ],

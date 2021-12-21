@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
+import { GramDatabaseService } from '../services/gram-database.service';
 
 interface sizeOption {
   value: number,
@@ -13,8 +15,6 @@ interface sizeOption {
   styleUrls: ['./editor.component.sass']
 })
 export class EditorComponent implements OnInit {
-
-  constructor( private auth: Auth ) { }
 
   sizeOptions: sizeOption[] = [
     {value: 5, viewValue:"5x5"},
@@ -32,27 +32,34 @@ export class EditorComponent implements OnInit {
   isLoading: boolean = true;
   isLoggedin: boolean = false;
   gotError: boolean = false;
+  publishError: boolean = false;
 
   loadedFile!: string;
   puzzleName: string = "nonogram";
   errorMessage: string = "";
 
+  constructor( private auth: Auth, private gramdb: GramDatabaseService, public dialog: MatDialog ) { }
+
   ngOnInit(): void {
     this.initBoard();
 
-    if (this.auth.currentUser) {
-      this.isLoggedin = true;
-    }
+    this.auth.onAuthStateChanged(
+      (user) => {
+        if (user) {
+          this.isLoggedin = true;
+        }
+      }
+    );
   }
 
-  async initBoard() {
+  initBoard() {
     this.isLoading = true;
     this.board = [];
-    await this.generateBoard();
+    this.generateBoard();
     this.isLoading = false;
   }
 
-  async generateBoard() {
+  generateBoard() {
     let numTiles = (this.selectedSizeOption * this.selectedSizeOption);
 
     for (let i = 0; i < numTiles; i++) {
@@ -70,6 +77,39 @@ export class EditorComponent implements OnInit {
     } else {
       this.board[tileIndex] = 0;
     }
+  }
+
+  //save gram to gram database
+  publishGram() {
+    const solutionString: string = this.board.toString().replace(/[,]/g, '');
+    const confirmDialogRef = this.dialog.open(PublishDialog);
+
+    confirmDialogRef.afterClosed().subscribe(result => {
+      if (result == "true") {
+        this.gramdb.addCustomGram({
+          name: this.puzzleName,
+          solution: solutionString,
+          author: this.auth.currentUser?.uid!
+        }).then(() => {
+          window.location.reload();
+        }).catch((error) => {
+          if (error == false) {
+            this.publishError = true;
+          }
+          else {
+            console.log(error);
+          }
+        });
+      }
+    });
+  }
+
+  openGram() {
+    const openDialogRef = this.dialog.open(OpenDialog);
+
+    openDialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
   //Put board values in string and save as txt file
@@ -115,6 +155,17 @@ export class EditorComponent implements OnInit {
         this.board[i] = parseInt(this.loadedFile[i]);
       }
     }
-
   }
 }
+
+@Component({
+  selector: 'dialog-publish-dialog',
+  templateUrl: 'publish-dialog.html',
+})
+export class PublishDialog {}
+
+@Component({
+  selector: 'dialog-open-dialog',
+  templateUrl: 'open-dialog.html',
+})
+export class OpenDialog {}

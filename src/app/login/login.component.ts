@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = "";
 
   email = new FormControl('', [Validators.required, Validators.email]);
+  username = new FormControl('', [Validators.required, Validators.minLength(4)]);
   password = new FormControl('', Validators.required);
   hidePassword = true;
 

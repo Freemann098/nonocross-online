@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomGram } from '../services/custom-gram';
 
 interface sizeOption {
   value: number,
@@ -38,16 +40,37 @@ export class HomeComponent implements OnInit {
   selectedSizeOption: number = this.sizeOptions[0].value;
   newSizeOption: number = this.selectedSizeOption;
 
+  importedSolution: number[] = [];
   isLoggedIn: boolean = false;
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.auth.onAuthStateChanged(
       () => {
-        this.isLoggedIn = true;
+        if (this.auth.currentUser) {
+          this.isLoggedIn = true;
+        }
       }
     )
+  }
+
+  importNonogram(gram: CustomGram) {
+    const size = Math.sqrt(gram.solution.length);
+    const solutionString = gram.solution;
+
+    this.selectedSizeOption = this.sizeOptions.find(({value}) => value === size)!.value;
+    this.newSizeOption = this.selectedSizeOption;
+    this.importedSolution = [];
+
+    for (let i = 0; i < solutionString.length; i++) {
+      this.importedSolution.push(parseInt(gram.solution.charAt(i)));
+    }
+
+    this.snackBar.open('Nonogram imported!', 'Close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
 }

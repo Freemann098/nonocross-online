@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SavedGramTreeComponent } from './saved-gram-tree.component';
+import { NonogramListComponent } from './nonogram-list.component';
 
-describe('SavedGramTreeComponent', () => {
-  let component: SavedGramTreeComponent;
-  let fixture: ComponentFixture<SavedGramTreeComponent>;
+describe('NonogramListComponent', () => {
+  let component: NonogramListComponent;
+  let fixture: ComponentFixture<NonogramListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SavedGramTreeComponent ]
+      declarations: [ NonogramListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SavedGramTreeComponent);
+    fixture = TestBed.createComponent(NonogramListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

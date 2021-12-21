@@ -49,22 +49,28 @@
   <h2 mat-dialog-title style="text-align: center;">Create Account</h2>
   <mat-dialog-content class="p-1">
     <div class="container">
-    <mat-form-field appearance="fill" style="width: 100%;">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="email@example.com" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid"></mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill" style="width: 100%;">
-      <mat-label>Password</mat-label>
-      <input matInput [formControl]="password" [type]="hidePassword ? 'password' : 'text'" required>
-      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <br>
-    <mat-error *ngIf="gotError" style="text-align: center;">{{ errorMessage }}</mat-error>
-  </div>
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid"></mat-error>
+      </mat-form-field>
+      <br>
+      <!--mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="username" [formControl]="username" required>
+        <mat-error *ngIf="username.invalid"></mat-error>
+      </mat-form-field>
+      <br-->
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Password</mat-label>
+        <input matInput [formControl]="password" [type]="hidePassword ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br>
+      <mat-error *ngIf="gotError" style="text-align: center;">{{ errorMessage }}</mat-error>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions>
     <div class="row">

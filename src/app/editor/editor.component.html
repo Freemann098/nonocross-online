@@ -6,7 +6,9 @@
       </div>
       <div class="col">
         <div style="text-align: right; ">
-          <button mat-button [disabled]="!isLoggedin">OPEN</button>
+          <!--Planned feature, currently disabled-->
+          <!--button mat-button [disabled]="!isLoggedin" (click)="openGram()">OPEN</button-->
+          <button mat-button [disabled]="true" (click)="openGram()">OPEN</button>
         </div>
       </div>
     </div>
@@ -40,7 +42,7 @@
       <br>
     </div>
     <div class="col-6" [ngStyle]="{'width': 400 + (selectedSizeOption * 8) + 'px'}">
-      <mat-card >
+      <mat-card>
         <mat-grid-list *ngIf="!isLoading" cols="{{ selectedSizeOption }}" rowHeight="1:1">
           <div *ngFor="let tile of board; let i = index">
             <mat-grid-tile
@@ -49,12 +51,22 @@
             ></mat-grid-tile>
           </div>
         </mat-grid-list>
-        <mat-card-actions align="end">
-          <h5 *ngIf="!isLoggedin" style="color: rgb(255, 208, 0); margin-top: 11px; margin-right: 50px;">
-            Login required to open, save, or publish
-          </h5>
-          <button mat-button [disabled]="!isLoggedin">SAVE</button>
-          <button mat-button [disabled]="!isLoggedin">PUBLISH</button>
+        <mat-card-actions>
+          <div class="row">
+            <div class="col">
+              <h5 *ngIf="!isLoggedin" style="color: rgb(255, 208, 0); margin-left: 10px;">
+                Login required to open or publish
+              </h5>
+              <h5 *ngIf="publishError" style="color: rgb(219, 82, 48); margin-left: 10px;">
+                Error: Upload maximum of 5 reached
+              </h5>
+            </div>
+            <div class="col" style="text-align: right;">
+              <!--Currently, publishing is the only way to save-->
+              <!--button mat-button [disabled]="!isLoggedin">SAVE</button-->
+              <button mat-button [disabled]="!isLoggedin" (click)="publishGram()">PUBLISH</button>
+            </div>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>

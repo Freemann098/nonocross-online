@@ -1,6 +1,6 @@
 <div>
   <div class="row">
-    <div class="col computer-col"></div>
+    <div *ngIf="!isLoggedIn" class="col computer-col"></div>
     <div class="col">
       <mat-card style="max-width: 260px;">
         <mat-card-subtitle>Settings</mat-card-subtitle>
@@ -19,27 +19,20 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <button disabled="{{boardSizeSelect.selected&&!difficultySelect.selected}}" mat-button class="primary-color-bg m-1">New</button>
+          <button mat-button disabled="{{boardSizeSelect.selected&&!difficultySelect.selected}}" class="primary-color-bg m-1">New</button>
         </form>
       </mat-card>
       <br>
-      <!--mat-card>
-        <app-load-file (errorEvent)="receiveError($event)" (fileEvent)="receiveFile($event)"></app-load-file>
-        <br>
-        <h5 *ngIf="gotError" style="color: rgb(219, 82, 48)">{{ errorMessage }}</h5>
-        <h5 *ngIf="!gotError && loadedFile" style="color:rgb(100, 236, 134)">Successfully imported file</h5>
-      </mat-card-->
     </div>
-
     <div class="col unselectable gameboard">
       <app-gameboard #board [difficulty]="newDifficultyOption" [boardSize]="newSizeOption"></app-gameboard>
     </div>
-    <div class="col computer-col"></div>
-    <!--div *ngIf="isLoggedIn" class="col" style="width: 400px;">
+    <div *ngIf="!isLoggedIn" class="col computer-col"></div>
+    <div *ngIf="isLoggedIn" class="col" style="width: 400px;">
       <mat-card>
         <mat-card-subtitle>Custom Nonograms</mat-card-subtitle>
-        <app-saved-gram-tree></app-saved-gram-tree>
+        <app-nonogram-list (openNonogramEvent)="importNonogram($event); board.newBoard(newSizeOption, newDifficultyOption, importedSolution)"></app-nonogram-list>
       </mat-card>
-    </div-->
+    </div>
   </div>
 </div>

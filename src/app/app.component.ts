@@ -9,7 +9,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 export class AppComponent implements OnInit{
 
   title = 'nonocross-online';
-
+  version = "v0.0.1";
   iconGithub = faGithub;
 
   constructor() {}

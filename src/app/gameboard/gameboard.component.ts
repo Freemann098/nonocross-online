@@ -58,7 +58,6 @@ export class GameboardComponent implements OnInit {
             break;
           case 1:
             chanceOfFill = 100 - (streak * ((100 / this.boardSize) * 3));
-            console.log(chanceOfFill);
             break;
           case 2:
             chanceOfFill = 100 - (streak * ((100 / this.boardSize) * 5));
@@ -87,7 +86,7 @@ export class GameboardComponent implements OnInit {
 
     //Fill board with 0s
     for (let i = 0; i < numTiles; i++) {
-      this.board.push(this.solution[i]);
+      this.board.push(0);
     }
   }
 
@@ -198,20 +197,23 @@ export class GameboardComponent implements OnInit {
     }
   }
 
-  async resetBoard() {
+  resetBoard(solution?: number[]) {
     this.board = [];
     this.solution = [];
+    if (solution) {
+      this.solution = solution!;
+    }
     this.colHints = [];
     this.rowHints = [];
     this.highestNumColHints = 0;
     this.highestNumRowHints = 0;
-    await this.initBoard();
+    this.initBoard();
   }
 
-  newBoard(size: number, difficulty: number) {
+  newBoard(size: number, difficulty: number, solution?: number[]) {
     this.boardSize = size;
     this.difficulty = difficulty;
-    this.resetBoard();
+    this.resetBoard(solution);
   }
 
   tileClicked(tileIndex: number) {

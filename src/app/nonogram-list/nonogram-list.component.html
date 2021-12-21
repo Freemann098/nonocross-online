@@ -1,0 +1,13 @@
+<mat-list role="list">
+  <mat-list-item *ngIf="!(customGrams.length > 0)">
+    <p>No custom nonograms uploaded</p>
+  </mat-list-item>
+  <mat-list-item *ngFor="let gram of customGrams" role="listitem" style="width: 200px;">
+    <div class="col">
+      <button mat-button style="min-width: 100px;" (click)="gramClicked(gram)">{{gram.name}}</button>
+    </div>
+    <div class="col-12" style="text-align: end;">
+      <button mat-button (click)="deleteGram(gram)"><fa-icon [icon]="iconTrash" size="1x"></fa-icon></button>
+    </div>
+  </mat-list-item>
+</mat-list>

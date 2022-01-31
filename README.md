@@ -1,8 +1,9 @@
-![logo](http://www.chasersmith.com/nonocross-online/logo-re.png)
+![logo](https://i.imgur.com/PDXwTwd.png)
 
 A [nonogram](https://en.wikipedia.org/wiki/Nonogram) puzzle Angular web app that can generate various sized nonograms. Has a nonogram editor that can export custom puzzles as txt files so they can be imported and shared. Has Firebase authentication allowing users to login with google or registered accounts. Planned implementation of user-made custom nonogram browser/library.
 
-**This project utilizes [Firebase](https://firebase.google.com/) for its api integration**
+## Firebase
+**This project utilizes [Firebase](https://firebase.google.com/) for its api integration** <br><br>
 In order to deploy the project, a Firebase project will need to be setup and connected by setting the appropriate environment variables in the Angular project. Remove "_CHANGEME" from the included environments folder and set the variables in `src/environments/environment.ts` and `src/environments/environment.prod.ts` for production
 
 
@@ -22,14 +23,17 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### Running unit tests
+## Built With
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  - [Angular](https://angular.io/)
+  - [Firebase](https://firebase.google.com/)
 
-### Running end-to-end tests
+## Authors
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  - **Chase Smith** -
+    [GitHub](https://github.com/chasersmith)
 
-### Further help
+## License
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is licensed under the [MIT](https://mit-license.org/) License - see the [LICENSE.md](LICENSE.md) file for
+details
